@@ -1,0 +1,143 @@
+    html {
+        font-size: 62.5%;
+        box-sizing: border-box;
+    }
+    
+    *, *::before, *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: inherit;
+    }
+
+    .calculator {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px;
+    
+    }
+
+    .calculator-screen {
+        width: 240px;
+        font-size: 3rem;
+        height: 50px;
+        border: 1px solid black;
+        background-color: azure;
+        color: black;
+        text-align: center;
+        padding-right: 20px;
+        padding-left: 10px;
+    }
+
+    button {
+        height: 50px;
+        background-color: aliceblue;
+        border-radius: 3px;
+        border: 1px solid #c4c4c4;
+        font-size: 2rem;
+        color: #333;
+        background-image: linear-gradient(to bottom,transparent,transparent 50%,rgba(0,0,0,.04));
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), inset 0 1px 0 0 rgba(255,255,255,.45), inset 0 -1px 0 0 rgba(255,255,255,.15), 0 1px 0 0 rgba(255,255,255,.15);
+        text-shadow: 0 1px rgba(255,255,255,.4);
+    }
+    
+    button:hover {
+        background-color: #eaeaea;
+    }
+    
+    .calculator-keys {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .operator3{
+        grid-area: 1/5;
+    }
+
+    .operator2{
+        grid-area: 2/5;
+    }
+
+    .operator1{
+        grid-area: 3/5;
+    }
+
+    .equal-sign{
+        grid-area: 4/5;
+    }
+
+    .operator5{
+        grid-area: 1/1;
+    }
+
+    #cloud {
+        grid-area: 2/1;
+    }
+
+    #seven {
+        grid-area: 1/2;
+    }
+    #eight {
+        grid-area: 1/3;
+    }
+    #nine {
+        grid-area: 1/4;
+    }
+
+    .operator4 {
+        grid-area: 4/2;
+    }
+
+    #zero {
+        grid-area: 4/3;
+    }
+
+    .decimal {
+        grid-area: 4/4;
+    }
+
+    #one {
+        grid-area: 3/2;
+    }
+
+    #two {
+        grid-area: 3/3;
+    }
+
+    #three {
+        grid-area: 3/4;
+    }
+
+    .top-display {
+        display: grid;
+        grid-template-columns: 2fr 6fr 2fr;
+    }
+
+    #one, #two, #three, #four, #five, #six, #seven, #eight, #nine, #zero, .decimal {
+        background-color: snow;
+    }
+
+    #one:hover, #two:hover, #three:hover, #four:hover, #five:hover, #six:hover, #seven:hover, #eight:hover, #nine:hover, #zero:hover{
+        background-color: #eaeaea;
+    }
+    
+    /* make .operations fit next to the calculator */
+    .operations {
+        display: grid;
+        grid-template-rows: 1fr 6fr;
+        background-color: darkseagreen;
+    }
+
+    .scientific {
+        display: grid;
+        grid-template-rows: 1fr 6fr;
+        background-color: darkseagreen;
+    }
+
+    body{
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+    }
