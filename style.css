@@ -24,7 +24,9 @@
 
     .calculator-screen {
         width: 240px;
-        font-size: 3rem;
+        font-size: 2rem;
+        vertical-align: middle;
+        line-height: 50px;
         height: 50px;
         border: 1px solid black;
         background-color: azure;
@@ -55,15 +57,15 @@
         grid-template-columns: repeat(5, 1fr);
     }
 
-    .operator3{
+    #times{
         grid-area: 1/5;
     }
 
-    .operator2{
+    #minus{
         grid-area: 2/5;
     }
 
-    .operator1{
+    #plus{
         grid-area: 3/5;
     }
 
@@ -71,7 +73,7 @@
         grid-area: 4/5;
     }
 
-    .operator5{
+    #nthroot {
         grid-area: 1/1;
     }
 
@@ -89,7 +91,7 @@
         grid-area: 1/4;
     }
 
-    .operator4 {
+    #plusminus {
         grid-area: 4/2;
     }
 
@@ -146,4 +148,46 @@
     .icons {
         width: 24px;
         height: 24px;
+    }
+
+    .help {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .dark-mode{
+        background-color:#2d3441;
+        color: white;
+      }
+
+    .dark-mode button{
+        background-color: dimgray;
+        color: white;
+      }
+
+    .dark-mode #one,.dark-mode #two,.dark-mode #three,.dark-mode #four,.dark-mode #five,.dark-mode #six,.dark-mode #seven,.dark-mode #eight,.dark-mode #nine,.dark-mode #zero,.dark-mode .decimal {
+        background-color: slategrey;
+    }
+
+    .dark-mode .calculator-screen {
+        background-color: gold;
+        color: black;
+    }
+
+    .dark-mode .operation {
+        background-color: darkslategrey;
+    }
+
+    .dark-mode .scientific {
+        background-color: darkslategrey;
+    }
+
+    .dark-mode button:hover {
+        background-color: #A1A1A1;
+    }
+
+    .dark-mode #one:hover,.dark-mode  #two:hover,.dark-mode  #three:hover,.dark-mode  #four:hover,.dark-mode  #five:hover,.dark-mode  #six:hover,.dark-mode  #seven:hover,.dark-mode  #eight:hover,.dark-mode  #nine:hover,.dark-mode  #zero:hover{
+        background-color: #A1A1A1;
     }

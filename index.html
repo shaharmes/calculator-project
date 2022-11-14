@@ -14,46 +14,46 @@
       </div>
       <div class="display">
         <div class="top-display">
-          <button type="button" id ="info" value="info"><img src="info.svg" alt="Info" class="icons"></button>
-          <button type="button" id ="mycalc" value="mycalc">My Calculator</button>
-          <button type="button" id ="settings" value="settings"><img src="settings.svg" alt="Settings" class="icons"></button>
+          <button type="button" id ="info" value="info" class="symbol"><img src="media/info.svg" alt="Info" class="icons"></button>
+          <button type="button" id ="mycalc" value="mycalc" class="symbol">My Calculator</button>
+          <button type="button" id ="settings" value="settings" class="symbol"><img src="media/settings.svg" alt="Settings" class="icons"></button>
 
-          <button type="button" id ="light" value="light"><img src="light.svg" alt="Lights" class="lights"></button>
-          <input type="text" class="calculator-screen" value="0" disabled />
-          <button type="button" id ="back" value="back"><img src="back.svg" alt="Back" class="icons"></button>
+          <button type="button" id ="light" value="light" class="symbol"><img src="media/light.svg" alt="Lights" class="lights"></button>
+          <div id="result" class="calculator-screen"></div>
+          <button type="button" id ="back" value="back" class="symbol"><img src="media/back.svg" alt="Back" class="icons"></button>
 
-          <button type="button" id ="clock" value="history"><img src="history.svg" alt="History" class="icons"></button>
-          <button type="button" class="all-clear" value="all-clear">C</button>
-          <button type="button" class="operator" value="/">&divide;</button>
+          <button type="button" id ="clock" value="history" class="symbol"><img src="media/history.svg" alt="History" class="icons"></button>
+          <button type="button" class="all-clear" value="all-clear" class="symbol">C</button>
+          <button type="button" class="operator" value="/" class="operator">&divide;</button>
 
         </div>
         <div class="calculator-keys">
-          <button type="button" class="operator1" value="+">+</button>
-          <button type="button" class="operator2" value="-">-</button>
-          <button type="button" class="operator3" value="*">&times;</button>
-          <button type="button" class="operator4" value="+-">&plusmn;</button>
-          <button type="button" class="operator5" value="nthRoot"><img src="nthRoot.svg" alt="nthRoot" class="icons"></button>
+          <button type="button" id="plus" class="operator" value="+">+</button>
+          <button type="button" id="minus" class="operator" value="-">-</button>
+          <button type="button" id="times" class="operator" value="*">&times;</button>
+          <button type="button" id="plusminus" class="operator" value="+-">&plusmn;</button>
+          <button type="button" id="nthroot" class="operator" value="nthRoot"><img src="media/nthRoot.svg" alt="nthRoot" class="icons"></button>
       
-          <button type="button" id="seven" value="7">7</button>
-          <button type="button" id="eight" value="8">8</button>
-          <button type="button" id="nine" value="9">9</button>
+          <button type="button" id="seven" class="number" value="7">7</button>
+          <button type="button" id="eight" class="number" value="8">8</button>
+          <button type="button" id="nine" class="number" value="9">9</button>
           
           
       
-          <button type="button" id="four" value="4">4</button>
-          <button type="button" id="five" value="5">5</button>
-          <button type="button" id="six" value="6">6</button>
+          <button type="button" id="four" class="number" value="4">4</button>
+          <button type="button" id="five" class="number" value="5">5</button>
+          <button type="button" id="six" class="number" value="6">6</button>
             
       
-          <button type="button" id="one" value="1">1</button>
-          <button type="button" id="two" value="2">2</button>
-          <button type="button" id="three" value="3">3</button>
+          <button type="button" id="one" class="number" value="1">1</button>
+          <button type="button" id="two" class="number" value="2">2</button>
+          <button type="button" id="three" class="number" value="3">3</button>
       
       
-          <button type="button" id="zero" value="0">0</button>
+          <button type="button" id="zero" class="number" value="0">0</button>
           <button type="button" value=""></button>
           <button type="button" value=""></button>
-          <button type="button" id ="cloud" value="cloud"><img src="cloud.png" alt="Cloud" class="icons"></button>
+          <button type="button" id ="cloud" value="cloud"><img src="media/cloud.png" alt="Cloud" class="icons"></button>
           <button type="button" class="decimal" value=".">.</button>
       
           <button type="button" class="equal-sign" value="=">=</button>
@@ -61,9 +61,9 @@
         </div>
       </div>
       <div class="scientific">
-        
       </div>
     </div>
-      
+    <!-- <script src="js/application.js"></script> -->
+    <script src="js/calculator.js"></script>
 </body>
 </html>
