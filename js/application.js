@@ -7,6 +7,9 @@ function darkMode() {
     element.classList.toggle("dark-mode");
  }
 
+ let displayApp = document.getElementById('result');
+
+
 function displayButtonInfo (button) {
     if (button.value === 'info') {
        return alertInfo();
@@ -15,13 +18,25 @@ function displayButtonInfo (button) {
         return darkMode();
     }
 
-    alert(button.value);
+    if (button.value === 'all-clear') {
+        operator = null;
+        lastNumber = '';
+        operatorFlag = false;
+        return displayApp.innerText = '';
+
+    }
+
+    if (button.value === 'back'){
+        return displayApp.innerText = displayApp.innerText.slice(0, -1);
+    }
+
+    // alert(button.value);
  }
 
 
-let buttons = document.getElementsByTagName('button');
-for (let i = 0, len = buttons.length; i < len; i++) {
-    buttons[i].onclick = function (){
+let buttons_app = document.getElementsByTagName('button');
+for (let i = 0, len = buttons_app.length; i < len; i++) {
+    buttons_app[i].onclick = function (){
         displayButtonInfo (this);
     }
 }

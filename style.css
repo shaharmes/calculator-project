@@ -51,6 +51,11 @@
     button:hover {
         background-color: #eaeaea;
     }
+
+    button:active{
+        background-color: darksalmon;
+    }
+
     
     .calculator-keys {
         display: grid;
@@ -190,4 +195,8 @@
 
     .dark-mode #one:hover,.dark-mode  #two:hover,.dark-mode  #three:hover,.dark-mode  #four:hover,.dark-mode  #five:hover,.dark-mode  #six:hover,.dark-mode  #seven:hover,.dark-mode  #eight:hover,.dark-mode  #nine:hover,.dark-mode  #zero:hover{
         background-color: #A1A1A1;
+    }
+
+    .dark-mode button{
+        border-color: #2d3441;
     }
