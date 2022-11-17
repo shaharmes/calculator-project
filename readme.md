@@ -47,11 +47,11 @@ this and make the content “dynamic” using JavaScript.~
 
 ## Part II:
 ### Notes:
-- ~Your UI implementation should answer all the visual requests/requirements listed in the
+- ~Your UI implementation should answer all the visual requests/requirements listed in the~
 spec above
-- Your styling definitions for this project should be saved independently as an external *.css
-file(s).
-- In this stage you can write in-code JavaScript functions within the HTML file, on next stages
+- ~Your styling definitions for this project should be saved independently as an external *.css
+file(s).~
+- ~In this stage you can write in-code JavaScript functions within the HTML file, on next stages
 you must write all your JavaScript code in separated *.js designated file(s).~
 
 1. ~Add js folder to your project and add to it application.js and calculator.js files
