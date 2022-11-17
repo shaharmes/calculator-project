@@ -6,10 +6,8 @@ let buttons = Array.from(document.getElementsByTagName('button'));
 let operator = null;
 let lastNumber = '';
 let operatorFlag = false;
+let demoResult = null;
 
-function evil(fn) {
-    return new Function ('return ' + fn)();
-}
 
 buttons.map(button => {
     button.addEventListener('click', (e) => {
@@ -60,9 +58,9 @@ buttons.map(button => {
                 break;
 
             case 'decimal':
-                display.innerText += '.';
-                break;
-
+                    display.innerText += '.';
+                    break;
+                
             }
     });
 });
