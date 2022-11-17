@@ -27,7 +27,19 @@ function displayButtonInfo (button) {
     }
 
     if (button.value === 'back'){
-        return displayApp.innerText = displayApp.innerText.slice(0, -1);
+        if (displayApp.innerText[displayApp.innerText.length - 1] === ' ') {
+                operatorFlag = false;
+               return displayApp.innerText = displayApp.innerText.slice(0, -2);
+        } else if (displayApp.innerText[displayApp.innerText.length - 1] === '*' ||
+            displayApp.innerText[displayApp.innerText.length - 1] === '/' ||
+            displayApp.innerText[displayApp.innerText.length - 1] === '+' ||
+            displayApp.innerText[displayApp.innerText.length - 1] === '-') {
+                operatorFlag = null;
+               return displayApp.innerText = displayApp.innerText.slice(0, -1);
+        }
+        displayApp.innerText = displayApp.innerText.slice(0, -1);
+        console.log(lastNumber);
+        return;
     }
 
     // alert(button.value);

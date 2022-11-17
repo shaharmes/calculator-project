@@ -132,6 +132,10 @@
     #one:hover, #two:hover, #three:hover, #four:hover, #five:hover, #six:hover, #seven:hover, #eight:hover, #nine:hover, #zero:hover{
         background-color: #eaeaea;
     }
+
+    #one:active, #two:active, #three:active, #four:active, #five:active, #six:active, #seven:active, #eight:active, #nine:active, #zero:active{
+        background-color: darksalmon;
+    }
     
     .operation {
         display: grid;
@@ -200,3 +204,7 @@
     .dark-mode button{
         border-color: #2d3441;
     }
+
+    #result{
+        white-space: pre;
+      }
