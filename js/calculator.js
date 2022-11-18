@@ -6,7 +6,7 @@ let buttons = Array.from(document.getElementsByTagName('button'));
 let operator = null;
 let lastNumber = '';
 let operatorFlag = false;
-let demoResult = null;
+let firstNumber = '';
 
 
 buttons.map(button => {
@@ -16,6 +16,8 @@ buttons.map(button => {
             case 'number':
                 if (operator) {
                     lastNumber += e.target.innerText;
+                } else if (!operatorFlag) {
+                    firstNumber += e.target.innerText;
                 }
                 if (display.innerText[display.innerText.length - 1] === ' ' && operatorFlag === false) {
                     display.innerText = display.innerText.slice(0, -1);
@@ -58,8 +60,22 @@ buttons.map(button => {
                 break;
 
             case 'decimal':
-                    display.innerText += '.';
-                    break;
+                if (operator) {
+                    if (lastNumber.indexOf('.') === -1) {
+                        lastNumber += '.';
+                        display.innerText += '.';
+                    } else {
+                        display.innerText = "Error"
+                }
+                } else {
+                    if (firstNumber.indexOf('.') === -1) {
+                        firstNumber += '.';
+                        display.innerText += '.';
+                    } else {
+                        display.innerText = "Error"
+                    }
+                }
+                break;
                 
             }
     });

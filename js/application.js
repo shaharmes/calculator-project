@@ -21,6 +21,7 @@ function displayButtonInfo (button) {
     if (button.value === 'all-clear') {
         operator = null;
         lastNumber = '';
+        firstNumber = '';
         operatorFlag = false;
         return displayApp.innerText = '';
 
