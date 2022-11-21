@@ -1,56 +1,46 @@
 let display = document.getElementById('result');
-
 let buttons = Array.from(document.getElementsByTagName('button'));
-
-
 let operator = null;
 let lastNumber = '';
 let operatorFlag = false;
 let firstNumber = '';
-
-
 buttons.map(button => {
     button.addEventListener('click', (e) => {
-
-        switch(e.target.className) {
+        let element = e.target;
+        switch (element.className) {
             case 'number':
                 if (operator) {
-                    lastNumber += e.target.innerText;
-                } else if (!operatorFlag) {
-                    firstNumber += e.target.innerText;
+                    lastNumber += element.innerText;
+                }
+                else if (!operatorFlag) {
+                    firstNumber += element.innerText;
                 }
                 if (display.innerText[display.innerText.length - 1] === ' ' && operatorFlag === false) {
                     display.innerText = display.innerText.slice(0, -1);
                 }
-
-                display.innerText += e.target.innerText;
+                display.innerText += element.innerText;
                 operatorFlag = false;
                 break;
-
             case 'operator':
-
                 if (operatorFlag) {
                     display.innerText = display.innerText.slice(0, -3);
                     operatorFlag = false;
                 }
-
                 if (operator) {
                     display.innerText = eval(display.innerText);
                 }
-                
-                operator = e.target.innerText;
-                if (e.target.id === 'times') {
+                operator = element.innerText;
+                if (element.id === 'times') {
                     operator = '*';
                 }
-                if (e.target.id === 'divide') {
+                if (element.id === 'divide') {
                     operator = '/';
                 }
-                display.innerText +=" " + operator;
-                display.innerText +=new String(" ");;
+                display.innerText += " " + operator;
+                display.innerText += new String(" ");
+                ;
                 operatorFlag = true;
-
                 break;
-
             case 'equal-sign':
                 if (operatorFlag) {
                     display.innerText = display.innerText.slice(0, -2);
@@ -58,25 +48,26 @@ buttons.map(button => {
                 }
                 display.innerText = eval(display.innerText);
                 break;
-
             case 'decimal':
                 if (operator) {
                     if (lastNumber.indexOf('.') === -1) {
                         lastNumber += '.';
                         display.innerText += '.';
-                    } else {
-                        display.innerText = "Error"
+                    }
+                    else {
+                        display.innerText = "Error";
+                    }
                 }
-                } else {
+                else {
                     if (firstNumber.indexOf('.') === -1) {
                         firstNumber += '.';
                         display.innerText += '.';
-                    } else {
-                        display.innerText = "Error"
+                    }
+                    else {
+                        display.innerText = "Error";
                     }
                 }
                 break;
-                
-            }
+        }
     });
 });
