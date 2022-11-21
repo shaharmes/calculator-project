@@ -41,7 +41,7 @@ function displayButtonInfo (button) {
     if (button.value === 'back'){
         if (display.innerText[display.innerText.length - 1] === ' ') {
                 operatorFlag = false;
-               return display.innerText = display.innerText.slice(0, -2);
+               return display.innerText = display.innerText.slice(0, -3);
         } else if (display.innerText[display.innerText.length - 1] === '*' ||
             display.innerText[display.innerText.length - 1] === '/' ||
             display.innerText[display.innerText.length - 1] === '+' ||
@@ -50,6 +50,10 @@ function displayButtonInfo (button) {
                return display.innerText = display.innerText.slice(0, -1);
         }
         display.innerText = display.innerText.slice(0, -1);
+        if (display.innerText[display.innerText.length - 1] === ' '){
+            display.innerText = display.innerText.slice(0, -1);
+            operatorFlag = true;
+        }
         return;
     }
 

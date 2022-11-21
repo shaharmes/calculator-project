@@ -9,8 +9,6 @@ let operatorFlag = false;
 let firstNumber = '';
 
 
-
-
 buttons.map(button => {
     button.addEventListener('click', (e) => {
         let element = e.target as HTMLElement;
