@@ -3,6 +3,10 @@ function alertInfo() {
 }
 function darkMode() {
     let element = document.body;
+    element.classList.toggle("dark-mode");
+}
+function lightBulb() {
+    let element = document.body;
     element.classList.toggle("light-mode");
 }
 let scientificFlag = false;
@@ -35,7 +39,7 @@ function displayButtonInfo(button) {
         return alertInfo();
     }
     if (button.value === 'light') {
-        return darkMode();
+        return lightBulb();
     }
     if (button.value === 'all-clear') {
         return allClear();
@@ -72,3 +76,26 @@ for (let i = 0, len = buttons_app.length; i < len; i++) {
         displayButtonInfo(this);
     };
 }
+function changeSettings() {
+    if (window.location.search) {
+        const params = new URLSearchParams(window.location.search);
+        let screenMode = params.get('mode');
+        let backgroundColor = params.get('color');
+        let fontFamily = params.get('font');
+        console.log(darkMode);
+        console.log(backgroundColor);
+        console.log(fontFamily);
+        if (screenMode === 'dark') {
+            darkMode();
+        }
+        if (backgroundColor) {
+            document.body.style.backgroundColor = backgroundColor;
+        }
+        if (fontFamily) {
+            document.body.style.fontFamily = fontFamily;
+        }
+    }
+}
+addEventListener('DOMContentLoaded', () => {
+    changeSettings();
+});

@@ -65,7 +65,6 @@ buttons.map(button => {
                     
                 
                 if (operator) {
-                    console.log('second operator', secondOperator);
                     if (scientificFlag) {
                         if (secondOperator) {
                             secondOperator = false;

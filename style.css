@@ -19,6 +19,33 @@
         width: 400px;
     }
 
+    #config {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px;
+        height: 340px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    form {
+        text-align: center;
+    }
+
+    .lab {
+        font-weight: normal;
+    }
+
+    #butn {
+        height: 35px;
+        width: 70px;
+    }
+
     .calculator-screen {
         width: 240px;
         font-size: 2rem;
@@ -164,9 +191,8 @@
     }
 
     .dark-mode{
-        background-color:#2d3441;
         color: white;
-      }
+      } 
 
     .dark-mode button{
         background-color: dimgray;
@@ -178,7 +204,6 @@
     }
 
     .dark-mode .calculator-screen {
-        background-color: gold;
         color: black;
     }
 
@@ -198,6 +223,10 @@
         background-color: #A1A1A1;
     }
 
+    .dark-mode #one:active, .dark-mode #two:active, .dark-mode #three:active, .dark-mode #four:active, .dark-mode #five:active, .dark-mode #six:active, .dark-mode #seven:active, .dark-mode #eight:active, .dark-mode #nine:active, .dark-mode #zero:active{
+        background-color: darksalmon;
+    }
+
     .dark-mode button{
         border-color: #2d3441;
     }
@@ -208,6 +237,14 @@
 
     .light-mode #light {
         background-color: #FFDAB9;
+    }
+
+    .dark-mode.scientific-mode #nthroot {
+        background-color: #D2691E;
+    }
+
+    .dark-mode.light-mode #light {
+        background-color: #D2691E;
     }
 
     .light-mode .calculator-screen{
@@ -235,6 +272,9 @@
     }
 
     .history-mode #operScreen {
+        width: 249px;
+        height: 278px;
+        overflow: auto;
         text-align: center;
         margin-top: 20px;
     }
@@ -264,6 +304,10 @@
 
     .history-mode #clock{
         background-color: #FFDAB9;
+    }
+    
+    .dark-mode.history-mode #clock{
+        background-color: #D2691E;
     }
 
     #result{
