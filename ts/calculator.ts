@@ -7,11 +7,24 @@ let operator = null;
 let lastNumber = '';
 let operatorFlag = false;
 let firstNumber = '';
+let secondOperator = false;
 
 
 buttons.map(button => {
     button.addEventListener('click', (e) => {
         let element = e.target as HTMLElement;
+        function operatorHandling() {
+            operator = element.innerText;
+                if (element.id === 'times') {
+                    operator = '*';
+                }
+                if (element.id === 'divide') {
+                    operator = '/';
+                }
+                display.innerText +=" " + operator;
+                display.innerText +=new String(" ");;
+                operatorFlag = true;
+        }
         switch(element.className) {
             case 'number':
                 if (operator) {
@@ -30,25 +43,38 @@ buttons.map(button => {
             case 'operator':
 
                 if (operatorFlag) {
-                    display.innerText = display.innerText.slice(0, -3);
-                    operatorFlag = false;
+                    if (scientificFlag) {
+                        display.innerText = display.innerText.slice(0, -3);
+                        operatorFlag = false;
+                        operatorHandling();
+                        break;
+                    } else {
+                        display.innerText = display.innerText.slice(0, -2);
+                        operatorFlag = false;
+                    }
                 }
-
-                if (operator) {
-                    display.innerText = eval(display.innerText);
-                }
+                    
                 
-                operator = element.innerText;
-                if (element.id === 'times') {
-                    operator = '*';
+                if (operator) {
+                    console.log('second operator', secondOperator);
+                    if (scientificFlag) {
+                        if (secondOperator) {
+                            secondOperator = false;
+                            display.innerText = eval(display.innerText);
+                        }
+                        else if (operator === '*' || operator === '/') {
+                            display.innerText = eval(display.innerText);
+                            secondOperator = false;
+                        } else {
+                            secondOperator = true;
+                            operatorHandling();
+                        }   
+                    } else {
+                        display.innerText = eval(display.innerText);
+                    }  
                 }
-                if (element.id === 'divide') {
-                    operator = '/';
-                }
-                display.innerText +=" " + operator;
-                display.innerText +=new String(" ");;
-                operatorFlag = true;
-
+                display.innerText = eval(display.innerText);
+                operatorHandling();
                 break;
 
             case 'equal-sign':

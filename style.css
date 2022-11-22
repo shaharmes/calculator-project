@@ -16,10 +16,7 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 900px;
-        display: grid;
-        grid-template-columns: 2fr 400px 2fr;
-    
+        width: 400px;
     }
 
     .calculator-screen {
@@ -138,13 +135,13 @@
     }
     
     .operation {
-        display: grid;
+        display: none;
         grid-template-rows: 1fr 6fr;
         background-color: whitesmoke;
     }
 
     .scientific {
-        display: grid;
+        display: none;
         grid-template-rows: 1fr 6fr;
         background-color: honeydew;
     }
@@ -205,6 +202,73 @@
         border-color: #2d3441;
     }
 
+    .scientific-mode #nthroot {
+        background-color: #FFDAB9;
+    }
+
+    .light-mode #light {
+        background-color: #FFDAB9;
+    }
+
+    .light-mode .calculator-screen{
+        background-color: gold;
+        color: black;
+    }
+
+    .scientific-mode .scientific{
+        display: grid;
+    }
+
+    .history-mode .operation {
+        display: grid;
+    }
+
+    .scientific-mode .calculator{
+        display: grid;
+        width: 651px;
+        grid-template-columns: 400px 249px;
+    }
+
+    .history-mode .calculator{
+        display: grid;
+        width: 650px;
+        grid-template-columns: 249px 400px;
+    }
+
+    .scientific-mode.history-mode .calculator{
+        display: grid;
+        width: 900px;
+        grid-template-columns: 249px 400px 249px;
+    }
+
+    .history-mode #clock{
+        background-color: #FFDAB9;
+    }
+
     #result{
         white-space: pre;
       }
+
+    @media screen and (max-width: 600px) {
+        .calculator {
+            display: grid;
+            width: 100%;
+            height: 100%;
+            grid-template-columns: 1fr;
+            grid-template-areas: "display"
+                                 "operation"
+                                 "scientific";
+        }
+
+        .scientific {
+            grid-area: scientific;
+            height: 100%;
+            margin-top: 0;
+        }
+
+        .display {
+            height: auto; /* fix*/
+        }
+    }
+
+    

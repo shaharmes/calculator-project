@@ -3,19 +3,31 @@ function alertInfo() {
 }
 function darkMode() {
     let element = document.body;
-    element.classList.toggle("dark-mode");
+    element.classList.toggle("light-mode");
+}
+let scientificFlag = false;
+function scientificMode() {
+    let element = document.body;
+    element.classList.toggle('scientific-mode');
+    if (scientificFlag) {
+        scientificFlag = false;
+    }
+    else {
+        scientificFlag = true;
+    }
+    allClear();
 }
 function allClear() {
-    display.innerText = '';
     operator = null;
     lastNumber = '';
     operatorFlag = false;
     firstNumber = '';
+    secondOperator = false;
+    display.innerText = '';
 }
 function historyMode() {
     let element = document.body;
     element.classList.toggle('history-mode');
-    document.getElementById('operation').style.display = 'none';
 }
 function displayButtonInfo(button) {
     if (button.value === 'info') {
@@ -26,6 +38,9 @@ function displayButtonInfo(button) {
     }
     if (button.value === 'all-clear') {
         return allClear();
+    }
+    if (button.value === 'nthRoot') {
+        return scientificMode();
     }
     if (button.value === "history") {
         return historyMode();
