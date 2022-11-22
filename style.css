@@ -221,6 +221,27 @@
 
     .history-mode .operation {
         display: grid;
+        grid-template-rows: 1fr 6fr;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .history-mode .operHead {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .history-mode #operScreen {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .history-mode #opLog {
+        height: 16px;
+        width: 16px;
     }
 
     .scientific-mode .calculator{

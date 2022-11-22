@@ -1,5 +1,7 @@
 let display = document.getElementById('result');
 
+let operDisplay = document.getElementById('operScreen');
+
 let buttons = Array.from(document.getElementsByTagName('button'));
 
 
@@ -8,6 +10,13 @@ let lastNumber = '';
 let operatorFlag = false;
 let firstNumber = '';
 let secondOperator = false;
+operDisplay.innerText = '';
+
+
+
+function operLog () {
+    operDisplay.innerText = operDisplay.innerText + display.innerText + "\n" + "=" + " " + eval(display.innerText) + "\n";
+}
 
 
 buttons.map(button => {
@@ -60,9 +69,11 @@ buttons.map(button => {
                     if (scientificFlag) {
                         if (secondOperator) {
                             secondOperator = false;
+                            operLog();
                             display.innerText = eval(display.innerText);
                         }
                         else if (operator === '*' || operator === '/') {
+                            operLog();
                             display.innerText = eval(display.innerText);
                             secondOperator = false;
                         } else {
@@ -70,9 +81,11 @@ buttons.map(button => {
                             operatorHandling();
                         }   
                     } else {
+                        operLog();
                         display.innerText = eval(display.innerText);
                     }  
                 }
+                
                 display.innerText = eval(display.innerText);
                 operatorHandling();
                 break;
@@ -82,6 +95,7 @@ buttons.map(button => {
                     display.innerText = display.innerText.slice(0, -2);
                     operatorFlag = false;
                 }
+                operLog();
                 display.innerText = eval(display.innerText);
                 break;
 

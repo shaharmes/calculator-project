@@ -27,6 +27,7 @@ function allClear() {
     firstNumber = '';
     secondOperator = false;
     display.innerText = '';
+    operDisplay.innerText = '';
 }
 
 

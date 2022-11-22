@@ -24,6 +24,7 @@ function allClear() {
     firstNumber = '';
     secondOperator = false;
     display.innerText = '';
+    operDisplay.innerText = '';
 }
 function historyMode() {
     let element = document.body;
