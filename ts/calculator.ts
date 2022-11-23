@@ -5,110 +5,126 @@ let operDisplay = document.getElementById('operScreen');
 let buttons = Array.from(document.getElementsByTagName('button'));
 
 
-let operator = null;
-let lastNumber = '';
-let operatorFlag = false;
-let firstNumber = '';
-let secondOperator = false;
-operDisplay.innerText = '';
+type calcHandler = {
+    operator: string;
+    lastNumber: string;
+    operatorFlag: boolean;
+    firstNumber: string;
+    secondOperator: boolean;
+    fixedOp: any;
+}
 
-
+let calcState: calcHandler = {
+    operator: null,
+    lastNumber: '',
+    operatorFlag: false,
+    firstNumber: '',
+    secondOperator: false,
+    fixedOp: null
+}
 
 function operLog () {
-    operDisplay.innerText = operDisplay.innerText + display.innerText + "\n" + "=" + " " + eval(display.innerText) + "\n";
+    operDisplay.innerText = operDisplay.innerText + 
+                            display.innerText + "\n" + "=" + " " +
+                            eval(display.innerText) + "\n";
+}
+
+function operatorHandling(element: HTMLElement) {
+    calcState.operator = element.innerText;
+    if (element.id === 'times') {
+        calcState.operator = '*';
+    }
+    if (element.id === 'divide') {
+        calcState.operator = '/';
+    }
+    display.innerText +=" " + calcState.operator;
+    display.innerText +=new String(" ");;
+    calcState.operatorFlag = true;
 }
 
 
 buttons.map(button => {
     button.addEventListener('click', (e) => {
         let element = e.target as HTMLElement;
-        function operatorHandling() {
-            operator = element.innerText;
-                if (element.id === 'times') {
-                    operator = '*';
-                }
-                if (element.id === 'divide') {
-                    operator = '/';
-                }
-                display.innerText +=" " + operator;
-                display.innerText +=new String(" ");;
-                operatorFlag = true;
-        }
         switch(element.className) {
             case 'number':
-                if (operator) {
-                    lastNumber += element.innerText;
-                } else if (!operatorFlag) {
-                    firstNumber += element.innerText;
+                if (calcState.operator) {
+                    calcState.lastNumber += element.innerText;
+                } else if (!calcState.operatorFlag) {
+                    calcState.firstNumber += element.innerText;
                 }
-                if (display.innerText[display.innerText.length - 1] === ' ' && operatorFlag === false) {
+                if (display.innerText[display.innerText.length - 1] === ' ' && calcState.operatorFlag === false) {
                     display.innerText = display.innerText.slice(0, -1);
                 }
 
                 display.innerText += element.innerText;
-                operatorFlag = false;
+                calcState.operatorFlag = false;
                 break;
 
             case 'operator':
 
-                if (operatorFlag) {
+                if (calcState.operatorFlag) {
                     if (scientificFlag) {
                         display.innerText = display.innerText.slice(0, -3);
-                        operatorFlag = false;
-                        operatorHandling();
+                        calcState.operatorFlag = false;
+                        operatorHandling(element);
                         break;
                     } else {
                         display.innerText = display.innerText.slice(0, -2);
-                        operatorFlag = false;
+                        calcState.operatorFlag = false;
                     }
                 }
                     
                 
-                if (operator) {
+                if (calcState.operator) {
                     if (scientificFlag) {
-                        if (secondOperator) {
-                            secondOperator = false;
+                        if (calcState.secondOperator) {
+                            calcState.secondOperator = false;
                             operLog();
                             display.innerText = eval(display.innerText);
                         }
-                        else if (operator === '*' || operator === '/') {
+                        else if (calcState.operator === '*' || calcState.operator === '/') {
                             operLog();
                             display.innerText = eval(display.innerText);
-                            secondOperator = false;
+                            calcState.secondOperator = false;
                         } else {
-                            secondOperator = true;
-                            operatorHandling();
+                            calcState.secondOperator = true;
+                            operatorHandling(element);
                         }   
                     } else {
-                        operLog();
+                        if (calcState.fixedOp.className === 'operator') {
+                        } else {
+                            operLog();
+                        }
+                        
                         display.innerText = eval(display.innerText);
                     }  
                 }
                 
                 display.innerText = eval(display.innerText);
-                operatorHandling();
+                operatorHandling(element);
                 break;
 
             case 'equal-sign':
-                if (operatorFlag) {
+                if (calcState.operatorFlag) {
                     display.innerText = display.innerText.slice(0, -2);
-                    operatorFlag = false;
+                    calcState.operatorFlag = false;
                 }
                 operLog();
                 display.innerText = eval(display.innerText);
                 break;
 
             case 'decimal':
-                if (operator) {
-                    if (lastNumber.indexOf('.') === -1) {
-                        lastNumber += '.';
+                if (calcState.operator) {
+                    if (calcState.lastNumber.indexOf('.') === -1) {
+                        calcState.lastNumber += '.';
                         display.innerText += '.';
                     } else {
                         display.innerText = "Error"
                 }
                 } else {
-                    if (firstNumber.indexOf('.') === -1) {
-                        firstNumber += '.';
+                    if (calcState.firstNumber.indexOf('.') === -1) {
+                        calcState.firstNumber += '.';
                         display.innerText += '.';
                     } else {
                         display.innerText = "Error"
@@ -117,5 +133,6 @@ buttons.map(button => {
                 break;
                 
             }
+            calcState.fixedOp = element;
     });
 });

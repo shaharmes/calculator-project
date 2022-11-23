@@ -26,13 +26,14 @@ function scientificMode() {
 }
 
 function allClear() {
-    operator = null;
-    lastNumber = '';
-    operatorFlag = false;
-    firstNumber = '';
-    secondOperator = false;
+    calcState.operator = null;
+    calcState.lastNumber = '';
+    calcState.operatorFlag = false;
+    calcState.firstNumber = '';
+    calcState.secondOperator = false;
     display.innerText = '';
     operDisplay.innerText = '';
+    calcState.fixedOp = null;
 }
 
 
@@ -63,19 +64,19 @@ function displayButtonInfo (button) {
 
     if (button.value === 'back'){
         if (display.innerText[display.innerText.length - 1] === ' ') {
-                operatorFlag = false;
+            calcState.operatorFlag = false;
                return display.innerText = display.innerText.slice(0, -3);
         } else if (display.innerText[display.innerText.length - 1] === '*' ||
             display.innerText[display.innerText.length - 1] === '/' ||
             display.innerText[display.innerText.length - 1] === '+' ||
             display.innerText[display.innerText.length - 1] === '-') {
-                operatorFlag = false;
+                calcState.operatorFlag = false;
                return display.innerText = display.innerText.slice(0, -1);
         }
         display.innerText = display.innerText.slice(0, -1);
         if (display.innerText[display.innerText.length - 1] === ' '){
             display.innerText = display.innerText.slice(0, -1);
-            operatorFlag = true;
+            calcState.operatorFlag = true;
         }
         return;
     }
