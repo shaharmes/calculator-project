@@ -23,6 +23,19 @@ let calcState: calcHandler = {
     fixedOp: null
 }
 
+function numberHandling(element: HTMLElement) {
+    if (calcState.operator) {                       
+        calcState.lastNumber += element.innerText;
+    } else if (!calcState.operatorFlag) {
+        calcState.firstNumber += element.innerText;
+    }
+    if (display.innerText[display.innerText.length - 1] === ' ' && calcState.operatorFlag === false) {
+        display.innerText = display.innerText.slice(0, -1);
+    }
+    display.innerText += element.innerText;
+    calcState.operatorFlag = false;
+}
+
 function operLog () {
     operDisplay.innerText = operDisplay.innerText + 
                             display.innerText + "\n" + "=" + " " +
@@ -38,8 +51,26 @@ function operatorHandling(element: HTMLElement) {
         calcState.operator = '/';
     }
     display.innerText +=" " + calcState.operator;
-    display.innerText +=new String(" ");;
+    display.innerText +=new String(" ");
     calcState.operatorFlag = true;
+}
+
+function operatorScientific(element: HTMLElement) {
+
+}
+
+function operatorSimple(element: HTMLElement) {
+    if (calcState.operatorFlag) {
+        display.innerText = display.innerText.slice(0, -3);
+        calcState.operatorFlag = false;
+    }
+    if (calcState.operator) {
+        if (calcState.fixedOp.className === 'operator') {
+        } else {
+            operLog();
+        }}
+    display.innerText = eval(display.innerText);
+    operatorHandling(element);
 }
 
 
@@ -48,71 +79,17 @@ buttons.map(button => {
         let element = e.target as HTMLElement;
         switch(element.className) {
             case 'number':
-                if (calcState.operator) {
-                    calcState.lastNumber += element.innerText;
-                } else if (!calcState.operatorFlag) {
-                    calcState.firstNumber += element.innerText;
-                }
-                if (display.innerText[display.innerText.length - 1] === ' ' && calcState.operatorFlag === false) {
-                    display.innerText = display.innerText.slice(0, -1);
-                }
-
-                display.innerText += element.innerText;
-                calcState.operatorFlag = false;
+                numberHandling(element);
                 break;
 
             case 'operator':
-
-                if (calcState.operatorFlag) {
-                    if (scientificFlag) {
-                        display.innerText = display.innerText.slice(0, -3);
-                        calcState.operatorFlag = false;
-                        operatorHandling(element);
-                        break;
-                    } else {
-                        display.innerText = display.innerText.slice(0, -2);
-                        calcState.operatorFlag = false;
-                    }
+                if (scientificFlag) {
+                    operatorScientific(element);
+                } else {
+                    operatorSimple(element);
                 }
-                    
-                
-                if (calcState.operator) {
-                    if (scientificFlag) {
-                        if (calcState.secondOperator) {
-                            calcState.secondOperator = false;
-                            operLog();
-                            display.innerText = eval(display.innerText);
-                        }
-                        else if (calcState.operator === '*' || calcState.operator === '/') {
-                            operLog();
-                            display.innerText = eval(display.innerText);
-                            calcState.secondOperator = false;
-                        } else {
-                            calcState.secondOperator = true;
-                            operatorHandling(element);
-                        }   
-                    } else {
-                        if (calcState.fixedOp.className === 'operator') {
-                        } else {
-                            operLog();
-                        }
-                        
-                        display.innerText = eval(display.innerText);
-                    }  
-                }
-                
-                display.innerText = eval(display.innerText);
-                operatorHandling(element);
                 break;
 
-            case 'equal-sign':
-                if (calcState.operatorFlag) {
-                    display.innerText = display.innerText.slice(0, -2);
-                    calcState.operatorFlag = false;
-                }
-                operLog();
-                display.innerText = eval(display.innerText);
-                break;
 
             case 'decimal':
                 if (calcState.operator) {

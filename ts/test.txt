@@ -1,0 +1,51 @@
+
+                if (calcState.operatorFlag) {
+                    if (scientificFlag) {
+                        display.innerText = display.innerText.slice(0, -3);
+                        calcState.operatorFlag = false;
+                        operatorHandling(element);
+                        break;
+                    } else {
+                        display.innerText = display.innerText.slice(0, -2);
+                        calcState.operatorFlag = false;
+                    }
+                }
+                    
+                
+                if (calcState.operator) {
+                    if (scientificFlag) {
+                        if (calcState.secondOperator) {
+                            calcState.secondOperator = false;
+                            operLog();
+                            display.innerText = eval(display.innerText);
+                        }
+                        else if (calcState.operator === '*' || calcState.operator === '/') {
+                            operLog();
+                            display.innerText = eval(display.innerText);
+                            calcState.secondOperator = false;
+                        } else {
+                            calcState.secondOperator = true;
+                            operatorHandling(element);
+                        }   
+                    } else {
+                        if (calcState.fixedOp.className === 'operator') {
+                        } else {
+                            operLog();
+                        }
+                        
+                        display.innerText = eval(display.innerText);
+                    }  
+                }
+                
+                display.innerText = eval(display.innerText);
+                operatorHandling(element);
+                break;
+
+            case 'equal-sign':
+                if (calcState.operatorFlag) {
+                    display.innerText = display.innerText.slice(0, -2);
+                    calcState.operatorFlag = false;
+                }
+                operLog();
+                display.innerText = eval(display.innerText);
+                break;
