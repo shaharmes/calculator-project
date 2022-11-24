@@ -274,111 +274,30 @@ body.dark-mode .calculator button {
 body.dark-mode .calculator button:hover {
   background-color: #A1A1A1;
 }
+body.dark-mode .calculator button:active {
+  background-color: darksalmon;
+}
 body.dark-mode .operation {
-  background-color: darkslategrey;
+  background-color: #8b8282;
 }
 body.dark-mode .scientific {
-  background-color: darkslategrey;
+  background-color: rgb(86, 114, 92);
 }
 
-#config {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 400px;
-  height: 340px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+body.light-mode .calculator .top-display .calculator-screen {
+  background-color: gold;
+  color: black;
 }
-
-form {
-  text-align: center;
-}
-
-.lab {
-  font-weight: normal;
-}
-
-#butn {
-  height: 35px;
-  width: 70px;
-}
-
-.help {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.scientific-mode #nthroot {
+body.light-mode #light {
   background-color: #FFDAB9;
-}
-
-.light-mode #light {
-  background-color: #FFDAB9;
-}
-
-.dark-mode.scientific-mode #nthroot {
-  background-color: #D2691E;
 }
 
 .dark-mode.light-mode #light {
   background-color: #D2691E;
 }
 
-.light-mode .calculator-screen {
-  background-color: gold;
-  color: black;
-}
-
-.scientific-mode .scientific {
-  display: grid;
-}
-
-.history-mode .operation {
-  display: grid;
-  grid-template-rows: 1fr 6fr;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.history-mode .operHead {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.scientific-mode .scientificHead {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.history-mode #operScreen {
-  width: 249px;
-  height: 278px;
-  overflow: auto;
-  text-align: center;
-  margin-top: 20px;
-}
-
-.history-mode #opLog {
-  height: 16px;
-  width: 16px;
-}
-
-.scientific-mode #scLog {
-  height: 20px;
-  width: 20px;
+.dark-mode.scientific-mode .calculator #nthroot {
+  background-color: #D2691E;
 }
 
 .scientific-mode .calculator {
@@ -386,21 +305,61 @@ form {
   width: 651px;
   grid-template-columns: 400px 249px;
 }
+.scientific-mode .calculator #nthroot {
+  background-color: #FFDAB9;
+}
+.scientific-mode .scientific {
+  display: grid;
+}
+.scientific-mode .scientific #scLog {
+  height: 20px;
+  width: 20px;
+}
+.scientific-mode .scientific .scientificHead {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
 
 .history-mode .calculator {
   display: grid;
   width: 650px;
   grid-template-columns: 249px 400px;
 }
+.history-mode .calculator #clock {
+  background-color: #FFDAB9;
+}
+.history-mode .operation {
+  display: grid;
+  grid-template-rows: 1fr 6fr;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.history-mode .operation #opLog {
+  height: 16px;
+  width: 16px;
+}
+.history-mode .operation #operScreen {
+  width: 249px;
+  height: 278px;
+  overflow: auto;
+  text-align: center;
+  margin-top: 20px;
+}
+.history-mode .operation .operHead {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
 
 .scientific-mode.history-mode .calculator {
   display: grid;
   width: 900px;
   grid-template-columns: 249px 400px 249px;
-}
-
-.history-mode #clock {
-  background-color: #FFDAB9;
 }
 
 .dark-mode.history-mode #clock {
