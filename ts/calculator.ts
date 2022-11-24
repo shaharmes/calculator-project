@@ -29,9 +29,7 @@ function numberHandling(element: HTMLElement) {
     } else if (!calcState.operatorFlag) {
         calcState.firstNumber += element.innerText;
     }
-    if (display.innerText[display.innerText.length - 1] === ' ' && calcState.operatorFlag === false) {
-        display.innerText = display.innerText.slice(0, -1);
-    }
+   
     display.innerText += element.innerText;
     calcState.operatorFlag = false;
 }
@@ -50,20 +48,46 @@ function operatorHandling(element: HTMLElement) {
     if (element.id === 'divide') {
         calcState.operator = '/';
     }
-    display.innerText +=" " + calcState.operator;
-    display.innerText +=new String(" ");
+    display.innerText +=calcState.operator;
     calcState.operatorFlag = true;
+}
+
+function checkIfLastElementIsOperator() {
+    if (display.innerText[display.innerText.length - 1] === '*' ||
+            display.innerText[display.innerText.length - 1] === '/' ||
+            display.innerText[display.innerText.length - 1] === '+' ||
+            display.innerText[display.innerText.length - 1] === '-') {
+                return true;
+        } else {
+            return false;
+        }
 }
 
 function operatorScientific(element: HTMLElement) {
 
+    if(calcState.secondOperator) {
+        display.innerText = eval(display.innerText);
+        calcState.secondOperator = false;
+    }
+
+    if (calcState.operator) {
+        if (calcState.operator === '*' || calcState.operator === '/') {
+            operLog();
+            display.innerText = eval(display.innerText);
+            calcState.secondOperator = false;
+        } else {
+            calcState.secondOperator = true;
+            operatorHandling(element);
+            calcState.fixedOp = element;
+            return;
+        }   
+    }
+
+    operatorHandling(element);
 }
 
+
 function operatorSimple(element: HTMLElement) {
-    if (calcState.operatorFlag) {
-        display.innerText = display.innerText.slice(0, -3);
-        calcState.operatorFlag = false;
-    }
     if (calcState.operator) {
         if (calcState.fixedOp.className === 'operator') {
         } else {
@@ -83,11 +107,19 @@ buttons.map(button => {
                 break;
 
             case 'operator':
+                if (checkIfLastElementIsOperator()) {
+                    display.innerText = display.innerText.slice(0, -1);
+                    calcState.operatorFlag = false;
+                    operatorHandling(element);
+                    break;
+                }
+
                 if (scientificFlag) {
                     operatorScientific(element);
                 } else {
                     operatorSimple(element);
                 }
+                
                 break;
 
 

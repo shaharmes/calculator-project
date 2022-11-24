@@ -52,22 +52,7 @@ function displayButtonInfo(button) {
         return historyMode();
     }
     if (button.value === 'back') {
-        if (display.innerText[display.innerText.length - 1] === ' ') {
-            calcState.operatorFlag = false;
-            return display.innerText = display.innerText.slice(0, -3);
-        }
-        else if (display.innerText[display.innerText.length - 1] === '*' ||
-            display.innerText[display.innerText.length - 1] === '/' ||
-            display.innerText[display.innerText.length - 1] === '+' ||
-            display.innerText[display.innerText.length - 1] === '-') {
-            calcState.operatorFlag = false;
-            return display.innerText = display.innerText.slice(0, -1);
-        }
         display.innerText = display.innerText.slice(0, -1);
-        if (display.innerText[display.innerText.length - 1] === ' ') {
-            display.innerText = display.innerText.slice(0, -1);
-            calcState.operatorFlag = true;
-        }
         return;
     }
 }
