@@ -32,8 +32,18 @@ function operatorHandling(element) {
     if (element.id === 'divide') {
         calcState.operator = '/';
     }
+    if (checkUndefined()) {
+        if (calcState.operator !== '-') {
+            errDisplay();
+            return;
+        }
+    }
     display.innerText += calcState.operator;
     calcState.operatorFlag = true;
+}
+function postEval() {
+    calcState.firstNumber = display.innerText;
+    calcState.lastNumber = '';
 }
 function checkIfLastElementIsOperator() {
     if (display.innerText[display.innerText.length - 1] === '*' ||
@@ -46,15 +56,41 @@ function checkIfLastElementIsOperator() {
         return false;
     }
 }
+function errDisplay() {
+    setTimeout(() => {
+        display.innerText = 'Error, Clear in 2 seconds';
+        setTimeout(() => {
+            display.innerText = '';
+        }, 2000);
+    }, 0);
+}
+function checkUndefined() {
+    if (display.innerText === 'undefined') {
+        display.innerText = '';
+        return true;
+    }
+    else {
+        return false;
+    }
+}
 function operatorScientific(element) {
+    if (!display.innerText) {
+        if (element.innerText !== '-') {
+            errDisplay();
+            return;
+        }
+    }
     if (calcState.secondOperator) {
+        operLog();
         display.innerText = eval(display.innerText);
+        postEval();
         calcState.secondOperator = false;
     }
-    if (calcState.operator) {
+    else if (calcState.operator) {
         if (calcState.operator === '*' || calcState.operator === '/') {
             operLog();
             display.innerText = eval(display.innerText);
+            postEval();
             calcState.secondOperator = false;
         }
         else {
@@ -75,6 +111,7 @@ function operatorSimple(element) {
         }
     }
     display.innerText = eval(display.innerText);
+    postEval();
     operatorHandling(element);
 }
 buttons.map(button => {
@@ -98,6 +135,14 @@ buttons.map(button => {
                     operatorSimple(element);
                 }
                 break;
+            case 'equal-sign':
+                if (checkIfLastElementIsOperator()) {
+                    display.innerText = display.innerText.slice(0, -1);
+                    calcState.operatorFlag = false;
+                }
+                operLog();
+                display.innerText = eval(display.innerText);
+                break;
             case 'decimal':
                 if (calcState.operator) {
                     if (calcState.lastNumber.indexOf('.') === -1) {
@@ -105,7 +150,7 @@ buttons.map(button => {
                         display.innerText += '.';
                     }
                     else {
-                        display.innerText = "Error";
+                        errDisplay();
                     }
                 }
                 else {
@@ -114,7 +159,7 @@ buttons.map(button => {
                         display.innerText += '.';
                     }
                     else {
-                        display.innerText = "Error";
+                        errDisplay();
                     }
                 }
                 break;

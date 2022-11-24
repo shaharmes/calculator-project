@@ -48,8 +48,19 @@ function operatorHandling(element: HTMLElement) {
     if (element.id === 'divide') {
         calcState.operator = '/';
     }
+    if(checkUndefined()) {
+        if (calcState.operator !== '-') {
+            errDisplay();
+            return;
+        }
+    }
     display.innerText +=calcState.operator;
     calcState.operatorFlag = true;
+}
+
+function postEval() {
+    calcState.firstNumber = display.innerText;
+    calcState.lastNumber = '';
 }
 
 function checkIfLastElementIsOperator() {
@@ -63,17 +74,43 @@ function checkIfLastElementIsOperator() {
         }
 }
 
+function errDisplay() {
+    setTimeout(() => { 
+        display.innerText = 'Error, Clear in 2 seconds';
+        setTimeout(() => {
+            display.innerText = '';
+        }, 2000);
+    }, 0);
+}
+
+function checkUndefined() {
+    if (display.innerText === 'undefined') {
+        display.innerText = '';
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function operatorScientific(element: HTMLElement) {
 
-    if(calcState.secondOperator) {
-        display.innerText = eval(display.innerText);
-        calcState.secondOperator = false;
-    }
+    if (!display.innerText) {
+            if (element.innerText !== '-') {
+                errDisplay();
+                return;
+            }
+        }
 
-    if (calcState.operator) {
+    if(calcState.secondOperator) {
+        operLog();
+        display.innerText = eval(display.innerText);
+        postEval();
+        calcState.secondOperator = false;
+    } else if (calcState.operator) {
         if (calcState.operator === '*' || calcState.operator === '/') {
             operLog();
             display.innerText = eval(display.innerText);
+            postEval();
             calcState.secondOperator = false;
         } else {
             calcState.secondOperator = true;
@@ -94,6 +131,7 @@ function operatorSimple(element: HTMLElement) {
             operLog();
         }}
     display.innerText = eval(display.innerText);
+    postEval();
     operatorHandling(element);
 }
 
@@ -122,6 +160,15 @@ buttons.map(button => {
                 
                 break;
 
+            case 'equal-sign':
+                if (checkIfLastElementIsOperator()) {
+                    display.innerText = display.innerText.slice(0, -1);
+                    calcState.operatorFlag = false;
+                }
+                operLog();
+                display.innerText = eval(display.innerText);
+                break;
+
 
             case 'decimal':
                 if (calcState.operator) {
@@ -129,14 +176,14 @@ buttons.map(button => {
                         calcState.lastNumber += '.';
                         display.innerText += '.';
                     } else {
-                        display.innerText = "Error"
+                        errDisplay();
                 }
                 } else {
                     if (calcState.firstNumber.indexOf('.') === -1) {
                         calcState.firstNumber += '.';
                         display.innerText += '.';
                     } else {
-                        display.innerText = "Error"
+                        errDisplay();
                     }
                 }
                 break;

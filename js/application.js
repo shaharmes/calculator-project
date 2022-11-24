@@ -52,6 +52,9 @@ function displayButtonInfo(button) {
         return historyMode();
     }
     if (button.value === 'back') {
+        if (checkIfLastElementIsOperator()) {
+            calcState.operatorFlag = false;
+        }
         display.innerText = display.innerText.slice(0, -1);
         return;
     }
