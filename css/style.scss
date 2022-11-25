@@ -364,6 +364,38 @@ body.light-mode {
             background-color: #D2691E;
         }
     }
+
+    .scientific {
+        
+        #scGrid{
+
+            #mod{
+                background-color: rgb(86, 114, 92);
+                color: black;
+                &:hover{
+                    background-color: #A1A1A1;
+                    
+                }
+                &:active{
+                    background-color: darksalmon;
+                }
+            }
+
+            .scBtn{
+                border-color: #2d3441;
+                background-color: dimgray;
+                text-shadow: none;
+                background-color: rgb(86, 114, 92);
+                &:hover{
+                    background-color: #A1A1A1;
+                    
+                }
+                &:active{
+                    background-color: darksalmon;
+                }
+            }
+        }
+    }
     
 }
 

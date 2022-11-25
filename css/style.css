@@ -299,6 +299,28 @@ body.light-mode #light {
 .dark-mode.scientific-mode .calculator #nthroot {
   background-color: #D2691E;
 }
+.dark-mode.scientific-mode .scientific #scGrid #mod {
+  background-color: rgb(86, 114, 92);
+  color: black;
+}
+.dark-mode.scientific-mode .scientific #scGrid #mod:hover {
+  background-color: #A1A1A1;
+}
+.dark-mode.scientific-mode .scientific #scGrid #mod:active {
+  background-color: darksalmon;
+}
+.dark-mode.scientific-mode .scientific #scGrid .scBtn {
+  border-color: #2d3441;
+  background-color: dimgray;
+  text-shadow: none;
+  background-color: rgb(86, 114, 92);
+}
+.dark-mode.scientific-mode .scientific #scGrid .scBtn:hover {
+  background-color: #A1A1A1;
+}
+.dark-mode.scientific-mode .scientific #scGrid .scBtn:active {
+  background-color: darksalmon;
+}
 
 .scientific-mode .calculator {
   display: grid;
