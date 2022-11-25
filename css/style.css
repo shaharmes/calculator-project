@@ -302,14 +302,22 @@ body.light-mode #light {
 
 .scientific-mode .calculator {
   display: grid;
-  width: 651px;
-  grid-template-columns: 400px 249px;
+  width: 551px;
+  grid-template-columns: 400px 149px;
 }
 .scientific-mode .calculator #nthroot {
   background-color: #FFDAB9;
 }
 .scientific-mode .scientific {
   display: grid;
+  height: 350px;
+  grid-template-rows: 1fr 2fr 3fr 1fr;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.scientific-mode .scientific #base {
+  margin-top: 10%;
+  text-align: center;
 }
 .scientific-mode .scientific #scLog {
   height: 20px;
@@ -322,6 +330,43 @@ body.light-mode #light {
   border: 1px solid #ccc;
   border-radius: 5px;
 }
+.scientific-mode .scientific #scGrid {
+  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.scientific-mode .scientific #scGrid .scIcons {
+  width: 24px;
+  height: 24px;
+}
+.scientific-mode .scientific #scGrid #mod {
+  background-color: honeydew;
+}
+.scientific-mode .scientific #scGrid #mod:hover {
+  background-color: #eaeaea;
+}
+.scientific-mode .scientific #scGrid #mod:active {
+  background-color: darksalmon;
+}
+.scientific-mode .scientific #scGrid .scBtn {
+  height: 50px;
+  background-color: honeydew;
+  border-radius: 3px;
+  border: 1px solid #b8b8b8;
+  font-size: 1.5rem;
+  color: #333;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 1px 0 0 rgba(255, 255, 255, 0.45), inset 0 -1px 0 0 rgba(255, 255, 255, 0.15), 0 1px 0 0 rgba(255, 255, 255, 0.15);
+  text-shadow: 0 1px rgba(255, 255, 255, 0.4);
+}
+.scientific-mode .scientific #scGrid .scBtn:hover {
+  background-color: #eaeaea;
+}
+.scientific-mode .scientific #scGrid .scBtn:active {
+  background-color: darksalmon;
+}
+.scientific-mode .scientific #scGrid .scBtn #power2, .scientific-mode .scientific #scGrid .scBtn #powery, .scientific-mode .scientific #scGrid .scBtn #rootn, .scientific-mode .scientific #scGrid .scBtn #rooty, .scientific-mode .scientific #scGrid .scBtn #pi {
+  background-image: linear-gradient(to bottom, transparent, transparent 100%, rgba(0, 0, 0, 0.04));
+}
 
 .history-mode .calculator {
   display: grid;
@@ -333,6 +378,7 @@ body.light-mode #light {
 }
 .history-mode .operation {
   display: grid;
+  height: 350px;
   grid-template-rows: 1fr 6fr;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -358,8 +404,8 @@ body.light-mode #light {
 
 .scientific-mode.history-mode .calculator {
   display: grid;
-  width: 900px;
-  grid-template-columns: 249px 400px 249px;
+  width: 800px;
+  grid-template-columns: 249px 400px 149px;
 }
 
 .dark-mode.history-mode #clock {

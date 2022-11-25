@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="media/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="media/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="media/favicon-16x16.png">
+    <link rel="manifest" href="media/site.webmanifest">
     <title>Calculator</title>
 </head>
 <body>
@@ -65,6 +69,15 @@
       <div class="scientific">
         <div class="scientificHead"><img src="media/nthRoot.svg" alt="nthRoot" id="scLog">&nbsp;<h4>Scientific</h4></div>
         <div id="scientificScreen"></div>
+        <div id="scGrid">
+          <button type="button" class="scBtn" id="power2"><img src="media/power2.svg" alt="Power" id="power2" class="scIcons"></button>
+          <button type="button" class="scBtn" id="rootn"><img src="media/root.svg" alt="Root" id="rootn" class="scIcons"></button>
+          <button type="button" class="scBtn" id="powery"><img src="media/powery.svg" alt="PowerByY" id="powery" class="scIcons"></button>
+          <button type="button" class="scBtn" id="rooty"><img src="media/rooty.svg" alt="RootByY"  id="rooty" class="scIcons"></button>
+          <button type="button" class="operator" value="%" id="mod">%</button>
+          <button type="button" class="scBtn" id="pi">Pi</button>
+        </div>
+        <div id="base">Base</div>
       </div>
     </div>
     <script src="js/calculator.js"></script>

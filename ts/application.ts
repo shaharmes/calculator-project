@@ -34,6 +34,8 @@ function allClear() {
     display.innerText = '';
     operDisplay.innerText = '';
     calcState.fixedOp = null;
+    calcState.rootCalc = 0;
+    calcState.rootFlag = false;
 }
 
 
@@ -102,5 +104,6 @@ function changeSettings(){
   }
   addEventListener('DOMContentLoaded',() => {
     changeSettings();
+    allClear();
   });
 

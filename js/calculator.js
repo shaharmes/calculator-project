@@ -1,13 +1,16 @@
 let display = document.getElementById('result');
 let operDisplay = document.getElementById('operScreen');
 let buttons = Array.from(document.getElementsByTagName('button'));
+let imgs = Array.from(document.querySelectorAll('.scIcons'));
 let calcState = {
     operator: null,
     lastNumber: '',
     operatorFlag: false,
     firstNumber: '',
     secondOperator: false,
-    fixedOp: null
+    fixedOp: null,
+    rootFlag: false,
+    rootCalc: 0
 };
 function numberHandling(element) {
     if (calcState.operator) {
@@ -15,6 +18,9 @@ function numberHandling(element) {
     }
     else if (!calcState.operatorFlag) {
         calcState.firstNumber += element.innerText;
+    }
+    if (display.innerText[display.innerText.length - 1] === ')') {
+        display.innerText += '*';
     }
     display.innerText += element.innerText;
     calcState.operatorFlag = false;
@@ -49,6 +55,7 @@ function checkIfLastElementIsOperator() {
     if (display.innerText[display.innerText.length - 1] === '*' ||
         display.innerText[display.innerText.length - 1] === '/' ||
         display.innerText[display.innerText.length - 1] === '+' ||
+        display.innerText[display.innerText.length - 1] === '%' ||
         display.innerText[display.innerText.length - 1] === '-') {
         return true;
     }
@@ -73,6 +80,53 @@ function checkUndefined() {
         return false;
     }
 }
+function powerBy2() {
+    if (checkIfLastElementIsOperator() || !display.innerText) {
+        errDisplay();
+        return;
+    }
+    display.innerText = display.innerText + '**2';
+}
+function powery() {
+    if (checkIfLastElementIsOperator() || !display.innerText) {
+        errDisplay();
+        return;
+    }
+    display.innerText = display.innerText + '**';
+}
+function root() {
+    if (checkIfLastElementIsOperator() || !display.innerText) {
+        errDisplay();
+        return;
+    }
+    display.innerText = display.innerText + '**0.5';
+}
+function pi() {
+    if (checkIfLastElementIsOperator() || !display.innerText) {
+        errDisplay();
+        return;
+    }
+    display.innerText = display.innerText + '3.141';
+}
+function rooty() {
+    if (checkIfLastElementIsOperator() || !display.innerText) {
+        errDisplay();
+        return;
+    }
+    display.innerText = display.innerText + '**(1/';
+}
+function mod() {
+    if (checkIfLastElementIsOperator() || !display.innerText) {
+        errDisplay();
+        return;
+    }
+    display.innerText = display.innerText + '%';
+}
+function closeRoot() {
+    display.innerText += ')';
+    calcState.rootFlag = false;
+    calcState.rootCalc = 0;
+}
 function operatorScientific(element) {
     if (!display.innerText) {
         if (element.innerText !== '-') {
@@ -80,6 +134,9 @@ function operatorScientific(element) {
             return;
         }
     }
+    console.log(calcState.firstNumber);
+    console.log(calcState.lastNumber);
+    console.log(display.innerText);
     if (calcState.secondOperator) {
         operLog();
         display.innerText = eval(display.innerText);
@@ -117,6 +174,12 @@ function operatorSimple(element) {
 buttons.map(button => {
     button.addEventListener('click', (e) => {
         let element = e.target;
+        console.log(calcState.rootFlag);
+        console.log(calcState.rootCalc);
+        console.log(element.className);
+        if (calcState.rootCalc > 1) {
+            closeRoot();
+        }
         switch (element.className) {
             case 'number':
                 numberHandling(element);
@@ -163,7 +226,52 @@ buttons.map(button => {
                     }
                 }
                 break;
+            case 'scBtn':
+                console.log('scientific');
+                if (element.id === 'power2') {
+                    powerBy2();
+                }
+                if (element.id === 'rootn') {
+                    root();
+                }
+                if (element.id === 'pi') {
+                    pi();
+                }
+                if (element.id === 'powery') {
+                    powery();
+                }
+                if (element.id === 'rooty') {
+                    calcState.rootFlag = true;
+                    rooty();
+                }
+                if (element.id === 'mod') {
+                    mod();
+                }
+                break;
         }
         calcState.fixedOp = element;
+        if (calcState.rootFlag === true) {
+            calcState.rootCalc++;
+        }
+    });
+});
+imgs.map(img => {
+    img.addEventListener('click', (e) => {
+        let element = e.target;
+        switch (element.id) {
+            case 'power2':
+                powerBy2();
+                break;
+            case 'rootn':
+                root();
+                break;
+            case 'powery':
+                powery();
+                break;
+            case 'rooty':
+                calcState.rootFlag = true;
+                rooty();
+                break;
+        }
     });
 });

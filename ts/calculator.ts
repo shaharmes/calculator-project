@@ -3,6 +3,7 @@ let display = document.getElementById('result');
 let operDisplay = document.getElementById('operScreen');
 
 let buttons = Array.from(document.getElementsByTagName('button'));
+let imgs = Array.from(document.querySelectorAll('.scIcons'));
 
 
 type calcHandler = {
@@ -12,6 +13,8 @@ type calcHandler = {
     firstNumber: string;
     secondOperator: boolean;
     fixedOp: any;
+    rootFlag: boolean;
+    rootCalc: number;
 }
 
 let calcState: calcHandler = {
@@ -20,7 +23,9 @@ let calcState: calcHandler = {
     operatorFlag: false,
     firstNumber: '',
     secondOperator: false,
-    fixedOp: null
+    fixedOp: null,
+    rootFlag: false,
+    rootCalc: 0
 }
 
 function numberHandling(element: HTMLElement) {
@@ -28,6 +33,11 @@ function numberHandling(element: HTMLElement) {
         calcState.lastNumber += element.innerText;
     } else if (!calcState.operatorFlag) {
         calcState.firstNumber += element.innerText;
+    }
+
+    
+    if (display.innerText[display.innerText.length - 1] === ')') {
+        display.innerText += '*';
     }
    
     display.innerText += element.innerText;
@@ -67,6 +77,7 @@ function checkIfLastElementIsOperator() {
     if (display.innerText[display.innerText.length - 1] === '*' ||
             display.innerText[display.innerText.length - 1] === '/' ||
             display.innerText[display.innerText.length - 1] === '+' ||
+            display.innerText[display.innerText.length - 1] === '%' ||
             display.innerText[display.innerText.length - 1] === '-') {
                 return true;
         } else {
@@ -92,6 +103,62 @@ function checkUndefined() {
     }
 }
 
+function powerBy2() {
+    if (checkIfLastElementIsOperator() || !display.innerText) {
+        errDisplay();
+        return;
+    }
+    display.innerText = display.innerText + '**2';
+}
+
+function powery () {
+    if (checkIfLastElementIsOperator() || !display.innerText) {
+        errDisplay();
+        return;
+    }
+    display.innerText = display.innerText + '**';
+}
+
+function root (){
+    if (checkIfLastElementIsOperator() || !display.innerText) {
+        errDisplay();
+        return;
+    }
+    display.innerText = display.innerText + '**0.5';
+}
+
+function pi () {
+    if (checkIfLastElementIsOperator() || !display.innerText) {
+        errDisplay();
+        return;
+    }
+    display.innerText = display.innerText + '3.141';
+}
+
+function rooty() {
+    if (checkIfLastElementIsOperator() || !display.innerText) {
+        errDisplay();
+        return;
+    }
+    display.innerText = display.innerText + '**(1/';
+}
+
+function mod() {
+    if (checkIfLastElementIsOperator() || !display.innerText) {
+        errDisplay();
+        return;
+    }
+    display.innerText = display.innerText + '%';
+}
+
+function closeRoot() {
+    display.innerText += ')';
+    calcState.rootFlag = false;
+    calcState.rootCalc = 0;
+}
+
+
+
 function operatorScientific(element: HTMLElement) {
 
     if (!display.innerText) {
@@ -100,6 +167,10 @@ function operatorScientific(element: HTMLElement) {
                 return;
             }
         }
+
+    console.log(calcState.firstNumber);
+    console.log(calcState.lastNumber);
+    console.log(display.innerText);
 
     if(calcState.secondOperator) {
         operLog();
@@ -139,6 +210,16 @@ function operatorSimple(element: HTMLElement) {
 buttons.map(button => {
     button.addEventListener('click', (e) => {
         let element = e.target as HTMLElement;
+
+        console.log(calcState.rootFlag);
+        console.log(calcState.rootCalc);
+        console.log(element.className);
+
+        if (calcState.rootCalc > 1) {
+            closeRoot();
+        }
+
+
         switch(element.className) {
             case 'number':
                 numberHandling(element);
@@ -187,8 +268,69 @@ buttons.map(button => {
                     }
                 }
                 break;
+
+            case 'scBtn':
+                console.log('scientific');
+                if (element.id === 'power2') {
+                    powerBy2();
+                    
+                }
+
+                if (element.id === 'rootn') {
+                    root();
+                }
+
+                if (element.id === 'pi') {
+                    pi();
+                }
+
+                if (element.id === 'powery') {
+                    powery();
+                }
+
+                if (element.id === 'rooty') {
+                    calcState.rootFlag = true;
+                    rooty();
+                }
+
+                if(element.id === 'mod') {
+                    mod();
+                }
+
+                break;
                 
             }
             calcState.fixedOp = element;
+            if (calcState.rootFlag === true) {
+                calcState.rootCalc++;
+            }
+            
+    });
+});
+
+imgs.map(img => {
+    img.addEventListener('click', (e) => {
+        let element = e.target as HTMLElement;
+
+        switch (element.id) {
+            case 'power2':
+                powerBy2();
+                break;
+            
+            case 'rootn':
+                root();
+                break;   
+
+            case 'powery':
+                powery();
+                break;
+
+            case 'rooty':
+                calcState.rootFlag = true;
+                rooty();
+                break;
+            
+            }
+
     });
 });
