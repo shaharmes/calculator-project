@@ -14,6 +14,7 @@ function popupInfo() {
         button.style.background = '#FFDAB9';
     } else {
         element.style.display = "none";
+        element.innerHTML = '';
         popupFlag = false;
         button.style.background = old;
     }
