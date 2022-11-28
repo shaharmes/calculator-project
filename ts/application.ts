@@ -1,5 +1,22 @@
-function alertInfo() {
-    alert('Shahar Meshulam\nVersion: 1.0.2\nInformation: Scientific calculator');
+let button = document.getElementById("info");
+const old = button.style.backgroundColor;
+
+function popupInfo() {
+    let element = document.getElementById("popup");
+    let version = '1.0.0';
+    const text = '<p>' +
+                    'Name: Shahar Meshulam<br>Version:' + version + '<br>Information: Scientific calculator<br><u>Click the icon again to close the popup!</u>' +
+                 '</p>'
+    if (!popupFlag){
+        element.style.display = "block";
+        element.insertAdjacentHTML('beforeend', text);
+        popupFlag = true;
+        button.style.background = '#FFDAB9';
+    } else {
+        element.style.display = "none";
+        popupFlag = false;
+        button.style.background = old;
+    }
 }
 
 function darkMode() {
@@ -12,7 +29,9 @@ function lightBulb() {
     element.classList.toggle("light-mode");
  }
 
+
 let scientificFlag = false;
+let popupFlag = false;
 
 function scientificMode() {
     let element = document.body;
@@ -46,7 +65,7 @@ function historyMode() {
 
 function displayButtonInfo (button) {
     if (button.value === 'info') {
-       return alertInfo();
+        return popupInfo();
     }
     if (button.value === 'light') {
         return lightBulb();
@@ -88,9 +107,6 @@ function changeSettings(){
         let screenMode = params.get('mode');
         let backgroundColor = params.get('color');
         let fontFamily = params.get('font');
-        console.log(darkMode);
-        console.log(backgroundColor);
-        console.log(fontFamily);
         if (screenMode === 'dark') {
             darkMode();
         }

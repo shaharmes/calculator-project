@@ -17,6 +17,11 @@ body .icons {
   width: 24px;
   height: 24px;
 }
+body #popup {
+  display: none;
+  text-align: center;
+  margin-top: 10px;
+}
 body .calculator {
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -154,7 +159,7 @@ body .calculator .calculator-keys #three:hover {
   background-color: #eaeaea;
 }
 body .calculator .calculator-keys #three:active {
-  background-color: darksalmon;
+  background-color: #e9967a;
 }
 body .calculator button {
   height: 50px;
@@ -322,6 +327,12 @@ body.light-mode #light {
   background-color: darksalmon;
 }
 
+.scientific-mode #popup {
+  display: none;
+  text-align: center;
+  margin-top: 10px;
+  width: 550px;
+}
 .scientific-mode .calculator {
   display: grid;
   width: 551px;
@@ -390,6 +401,12 @@ body.light-mode #light {
   background-image: linear-gradient(to bottom, transparent, transparent 100%, rgba(0, 0, 0, 0.04));
 }
 
+.history-mode #popup {
+  display: none;
+  text-align: center;
+  margin-top: 10px;
+  width: 650px;
+}
 .history-mode .calculator {
   display: grid;
   width: 650px;
@@ -424,6 +441,13 @@ body.light-mode #light {
   border-radius: 5px;
 }
 
+.scientific-mode.history-mode #popup {
+  display: none;
+  text-align: center;
+  margin-top: 10px;
+  margin-left: 20px;
+  width: 800px;
+}
 .scientific-mode.history-mode .calculator {
   display: grid;
   width: 800px;
