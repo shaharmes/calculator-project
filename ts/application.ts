@@ -1,5 +1,10 @@
 let button = document.getElementById("info");
 const old = button.style.backgroundColor;
+let element = document.getElementById("cloud");
+const oldB = button.style.backgroundColor;
+let scientificFlag = false;
+let popupFlag = false;
+let remoteFlag = false;
 
 function popupInfo() {
     let element = document.getElementById("popup");
@@ -20,6 +25,16 @@ function popupInfo() {
     }
 }
 
+function remoteMode() {
+    if (!remoteFlag) {
+        element.style.background = '#FFDAB9';
+        remoteFlag = true;
+    } else {
+        element.style.background = oldB;
+        remoteFlag = false;
+    }
+}
+
 function darkMode() {
     let element = document.body;
     element.classList.toggle("dark-mode");
@@ -29,10 +44,6 @@ function lightBulb() {
     let element = document.body;
     element.classList.toggle("light-mode");
  }
-
-
-let scientificFlag = false;
-let popupFlag = false;
 
 function scientificMode() {
     let element = document.body;
@@ -82,6 +93,10 @@ function displayButtonInfo (button) {
 
     if (button.value === "history") {
         return historyMode();
+    }
+
+    if (button.value === 'cloud') {
+        return remoteMode();
     }
 
     if (button.value === 'back'){

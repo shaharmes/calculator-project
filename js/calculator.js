@@ -25,6 +25,11 @@ function numberHandling(element) {
     display.innerText += element.innerText;
     calcState.operatorFlag = false;
 }
+const remoteCalc = async () => {
+    let response = await fetch("https://api.mathjs.org/v4/?expr=" + encodeURIComponent(display.innerText));
+    let data = await response.text();
+    return data;
+};
 function operLog() {
     operDisplay.innerText = operDisplay.innerText +
         display.innerText + "\n" + "=" + " " +
@@ -134,19 +139,30 @@ function operatorScientific(element) {
             return;
         }
     }
-    console.log(calcState.firstNumber);
-    console.log(calcState.lastNumber);
-    console.log(display.innerText);
     if (calcState.secondOperator) {
         operLog();
-        display.innerText = eval(display.innerText);
+        if (remoteFlag) {
+            remoteCalc().then((data) => {
+                display.innerText = data;
+            });
+        }
+        else {
+            display.innerText = eval(display.innerText);
+        }
         postEval();
         calcState.secondOperator = false;
     }
     else if (calcState.operator) {
         if (calcState.operator === '*' || calcState.operator === '/') {
             operLog();
-            display.innerText = eval(display.innerText);
+            if (remoteFlag) {
+                remoteCalc().then((data) => {
+                    display.innerText = data;
+                });
+            }
+            else {
+                display.innerText = eval(display.innerText);
+            }
             postEval();
             calcState.secondOperator = false;
         }
@@ -174,9 +190,6 @@ function operatorSimple(element) {
 buttons.map(button => {
     button.addEventListener('click', (e) => {
         let element = e.target;
-        console.log(calcState.rootFlag);
-        console.log(calcState.rootCalc);
-        console.log(element.className);
         if (calcState.rootCalc > 1) {
             closeRoot();
         }
